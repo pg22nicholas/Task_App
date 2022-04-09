@@ -11,6 +11,9 @@ import com.vfs.todoapp_final.taskedit.EditTaskListener
 import com.vfs.todoapp_final.tasklist.TaskFragment
 import com.vfs.todoapp_final.tasklist.TaskListener
 
+/**
+ * Main Activity for displaying Categories and their tasks
+ */
 class MainActivity : AppCompatActivity(), CategoryListener, EditTaskListener, TaskListener {
 
     lateinit var taskFragment : TaskFragment

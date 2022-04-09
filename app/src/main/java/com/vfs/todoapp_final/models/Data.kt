@@ -1,5 +1,8 @@
 package com.vfs.todoapp_final.models
 
+/**
+ * Singleton class for holding all categories and their tasks
+ */
 class Data {
 
     companion object {

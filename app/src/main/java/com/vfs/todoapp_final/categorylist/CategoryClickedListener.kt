@@ -1,6 +1,8 @@
 package com.vfs.todoapp_final.categorylist
 
-// Interface for Click events
+/**
+ * Interface for category click events inside the category RecyclerView
+ */
 interface CategoryClickedListener {
 
     fun onShortClick(index : Int)

@@ -6,10 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Spinner
+import android.widget.*
 import com.vfs.todoapp_final.R
 import com.vfs.todoapp_final.models.Category
 import com.vfs.todoapp_final.models.Data
@@ -19,6 +16,9 @@ import com.vfs.todoapp_final.models.Task
 private const val ARG_TASK_INDEX = "Task"
 private const val ARG_CATEGORY_INDEX = "Category"
 
+/**
+ * Fragment for editing and creating tasks inside a category
+ */
 class EditTaskFragment : Fragment() {
 
     private lateinit var task : Task
@@ -62,7 +62,7 @@ class EditTaskFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Spinner for category color dropdown
+        // Spinner for priority color dropdown
         val spinner : Spinner = view.findViewById(R.id.spinner_task_priorities)
         ArrayAdapter.createFromResource(
             view.context,
@@ -75,16 +75,27 @@ class EditTaskFragment : Fragment() {
             spinner.adapter = adapter
         }
 
+        // Attempt to save/create the task
         view.findViewById<Button>(R.id.button_edit_task).setOnClickListener {
 
-            task.name = view.findViewById<EditText>(R.id.text_edit_task).text.toString()
-            task.priorityColor = MyColor.PriorityColors.values()[spinner.selectedItemPosition]
+            val name : String = view.findViewById<EditText>(R.id.text_edit_task).text.toString()
 
-            if (taskIndex < 0) {
-                category.addTask(task)
-                taskIndex = category.todoTaskList.size
+            // Prevent saving/creating a task with an empty name
+            if (name.isEmpty()) {
+                Toast.makeText(context, "Task cannot have an empty name", Toast.LENGTH_LONG).show()
+            } else {
+                // Save the task
+                task.name = name
+                    task.priorityColor = MyColor.PriorityColors.values()[spinner.selectedItemPosition]
+
+                if (taskIndex < 0) {
+                    category.addTask(task)
+                    taskIndex = category.todoTaskList.size
+                }
+                listener.onSaveClicked(taskIndex, categoryIndex)
             }
-            listener.onSaveClicked(taskIndex, categoryIndex)
+
+
         }
 
         spinner.setSelection(task.priorityColor.ordinal)

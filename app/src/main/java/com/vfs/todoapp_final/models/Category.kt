@@ -1,5 +1,8 @@
 package com.vfs.todoapp_final.models
 
+/**
+ * Model for representing a Category of tasks
+ */
 class Category(val name : String, private var categoryColor : MyColor.CategoryColors = MyColor.CategoryColors.DEFAULT, taskList : MutableList<Task> = mutableListOf()) {
 
     // Tasks that are not finished

@@ -9,6 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.vfs.todoapp_final.R
 import com.vfs.todoapp_final.models.Task
 
+/**
+ * base ViewHolder for displaying the list of finished and to-do tasks
+ */
 abstract class TaskViewHolder(rootLayout : LinearLayout) : RecyclerView.ViewHolder(rootLayout) {
 
     var taskNameTextView : TextView? = null

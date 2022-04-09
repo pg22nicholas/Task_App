@@ -12,6 +12,9 @@ import com.vfs.todoapp_final.R
 import com.vfs.todoapp_final.models.Category
 import com.vfs.todoapp_final.models.Data
 
+/**
+ * Fragment for displaying a list of tasks inside a category
+ */
 class TaskFragment : Fragment() {
 
     val ARG_CATEGORY : String = "category"
@@ -46,23 +49,25 @@ class TaskFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Setup RV for to-do tasks
         todoTaskAdapter = TaskAdapter(selectedCategory, todoTaskListener(), true)
         val todoRV : RecyclerView = view.findViewById(R.id.rv_todo_task_list)
         todoRV.adapter = todoTaskAdapter
 
+        // Setup RV for finished tasks
         finishedTaskAdapter = TaskAdapter(selectedCategory, finishedTaskListener(), false)
         val finishedRV : RecyclerView = view.findViewById(R.id.rv_finished_task_list)
         finishedRV.adapter = finishedTaskAdapter
 
+        // Removes all finished tasks
         view.findViewById<Button>(R.id.button_remove_finished_tasks).setOnClickListener {
             selectedCategory.removeAllFinishedTasks()
             finishedTaskAdapter.notifyDataSetChanged()
         }
 
+        // Create a new task
         view.findViewById<Button>(R.id.button_add_task).setOnClickListener {
-
             taskListener.onEditTask(-1, Data.getCategoryIndex(selectedCategory))
-
         }
     }
 
@@ -79,12 +84,14 @@ class TaskFragment : Fragment() {
 
 fun TaskFragment.todoTaskListener() = object : TaskClickedListener {
 
+    // Set to-do task as finished
     override fun onShortClick(index: Int) {
         todoTaskAdapter.notifyItemRemoved(index)
         val insertIndex = selectedCategory.setTaskFinished(index)
         finishedTaskAdapter.notifyItemInserted(insertIndex)
     }
 
+    // Go to edit fragment for the task
     override fun onLongClick(index: Int) {
         taskListener.onEditTask(index, Data.getCategoryIndex(selectedCategory))
     }
@@ -92,6 +99,7 @@ fun TaskFragment.todoTaskListener() = object : TaskClickedListener {
 
 fun TaskFragment.finishedTaskListener() = object : TaskClickedListener {
 
+    // Set finished task as to-do
     override fun onShortClick(index: Int) {
         finishedTaskAdapter.notifyItemRemoved(index)
         val insertIndex = selectedCategory.setTaskTodo(index)

@@ -17,8 +17,9 @@ import com.vfs.todoapp_final.models.Data
 import com.vfs.todoapp_final.models.MyColor
 
 
-
-
+/**
+ * Fragment for displaying all categories and their metadata
+ */
 class CategoryFragment : Fragment() {
 
     lateinit var categoryAdapter : CategoryAdapter
@@ -46,7 +47,6 @@ class CategoryFragment : Fragment() {
         categoryAdapter = CategoryAdapter(categoryListener())
         categoryRV = view.findViewById(R.id.rv_category_list)
         categoryRV.adapter = categoryAdapter;
-
 
         // Alert dialog for adding new category
         val alertView: View = layoutInflater.inflate(R.layout.add_category_dialog, null)
@@ -109,11 +109,6 @@ class CategoryFragment : Fragment() {
         }
         else
             Toast.makeText(context, "Can't have empty name", Toast.LENGTH_LONG).show()
-    }
-
-
-    fun gotoTaskEditor() {
-        // TODO:
     }
 }
 

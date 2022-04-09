@@ -10,7 +10,9 @@ import com.vfs.todoapp_final.models.Data
 import android.graphics.drawable.GradientDrawable
 import com.vfs.todoapp_final.categorylist.CategoryClickedListener
 
-
+/**
+ * ViewHolder for displaying the list of categories
+ */
 class CategoryViewHolder(rootLayout : LinearLayout) : RecyclerView.ViewHolder(rootLayout) {
 
     var categoryNameTextView : TextView? = null

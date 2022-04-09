@@ -2,7 +2,7 @@ package com.vfs.todoapp_final.models
 
 import kotlin.properties.Delegates
 
-class Task(val name : String) {
+class Task(var name : String) {
 
     var priorityColor : MyColor.PriorityColors = MyColor.PriorityColors.NONE
 

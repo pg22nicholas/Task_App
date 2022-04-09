@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".taskedit.EditTaskFragment">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center|top"
+        android:layout_marginTop="50dp">
+
+        <EditText
+            android:id="@+id/text_edit_task"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:hint="Name"/>
+
+        <Spinner
+            android:id="@+id/spinner_task_priorities"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown"
+            tools:listitem=""/>
+
+        <Button
+            android:id="@+id/button_edit_task"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Save"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+
+
+</FrameLayout>

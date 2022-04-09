@@ -128,6 +128,6 @@ fun CategoryFragment.categoryListener() = object : CategoryClickedListener {
     }
 
     override fun onAddClick(index: Int) {
-
+        listener.onEditTask(-1, index)
     }
 }

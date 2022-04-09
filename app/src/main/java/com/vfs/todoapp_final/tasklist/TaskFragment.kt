@@ -1,5 +1,6 @@
 package com.vfs.todoapp_final.tasklist
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ class TaskFragment : Fragment() {
 
     lateinit var todoTaskAdapter : TaskAdapter
     lateinit var finishedTaskAdapter : TaskAdapter
+    lateinit var taskListener : TaskListener
 
     lateinit var selectedCategory: Category
 
@@ -33,6 +35,11 @@ class TaskFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_task, container, false)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        taskListener = context as TaskListener
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -67,7 +74,7 @@ fun TaskFragment.todoTaskListener() = object : TaskClickedListener {
     }
 
     override fun onLongClick(index: Int) {
-        // TODO
+        taskListener.onEditTask(index, Data.getCategoryIndex(selectedCategory))
     }
 }
 

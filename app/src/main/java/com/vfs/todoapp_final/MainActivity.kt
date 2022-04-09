@@ -6,12 +6,16 @@ import com.vfs.todoapp_final.categorylist.CategoryFragment
 import com.vfs.todoapp_final.categorylist.CategoryListener
 import com.vfs.todoapp_final.models.Data
 import com.vfs.todoapp_final.models.MyColor
+import com.vfs.todoapp_final.taskedit.EditTaskFragment
+import com.vfs.todoapp_final.taskedit.EditTaskListener
 import com.vfs.todoapp_final.tasklist.TaskFragment
+import com.vfs.todoapp_final.tasklist.TaskListener
 
-class MainActivity : AppCompatActivity(), CategoryListener {
+class MainActivity : AppCompatActivity(), CategoryListener, EditTaskListener, TaskListener {
 
     lateinit var taskFragment : TaskFragment
     lateinit var categoryFragment: CategoryFragment
+    lateinit var editTaskFragment : EditTaskFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,5 +36,17 @@ class MainActivity : AppCompatActivity(), CategoryListener {
             .replace(R.id.fragment_container, taskFragment)
             .addToBackStack(null)
             .commit()
+    }
+
+    override fun onEditTask(taskIndex: Int, categoryIndex: Int) {
+        editTaskFragment = EditTaskFragment.newInstance(taskIndex, categoryIndex)
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, editTaskFragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
+    override fun onSaveClicked(taskIndex: Int, categoryIndex: Int) {
+        supportFragmentManager.popBackStack()
     }
 }

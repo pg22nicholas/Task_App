@@ -23,5 +23,15 @@ class Data {
         fun addCategory(categoryToAdd : Category) {
             categoryList.add(categoryToAdd)
         }
+
+        fun getCategoryIndex(categoryCheck : Category) : Int {
+            var index : Int = 0;
+            for (category in categoryList) {
+                if (category == categoryCheck)
+                    return index
+                index++
+            }
+            throw IllegalAccessException(categoryCheck.name + " is not a stored category")
+        }
     }
 }

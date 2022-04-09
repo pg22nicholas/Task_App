@@ -59,6 +59,11 @@ class MyColor {
             return "#" + hexString.replaceFirst("^ff", "")
         }
 
+        /**
+         * Get the color int from color resource id
+         * @param resourceId    Color resource ID
+         * @return              Color Hex int
+         */
         private fun getColorInt(resourceId: Int) : Int {
             return context.resources.getColor(resourceId, context.theme)
         }

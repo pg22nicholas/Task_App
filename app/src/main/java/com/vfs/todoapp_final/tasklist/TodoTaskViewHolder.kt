@@ -6,6 +6,9 @@ import android.view.View
 import android.widget.LinearLayout
 import com.vfs.todoapp_final.models.Task
 
+/**
+ * ViewHolder for tasks in the to-do list
+ */
 class TodoTaskViewHolder (rootLayout : LinearLayout) : TaskViewHolder(rootLayout) {
 
     override fun bindCategory(task: Task, isLast: Boolean) {

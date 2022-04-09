@@ -1,10 +1,6 @@
 package com.vfs.todoapp_final
 
-import android.content.res.ColorStateList
-import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -12,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.vfs.todoapp_final.models.Category
 import com.vfs.todoapp_final.models.Data
 import android.graphics.drawable.GradientDrawable
-import android.util.Log
+import com.vfs.todoapp_final.categorylist.CategoryClickedListener
 
 
 class CategoryViewHolder(rootLayout : LinearLayout) : RecyclerView.ViewHolder(rootLayout) {
@@ -21,18 +17,20 @@ class CategoryViewHolder(rootLayout : LinearLayout) : RecyclerView.ViewHolder(ro
     var categoryCountTextView : TextView? = null
     var categoryContainer : LinearLayout? = null
     var categoryRoot: LinearLayout? = null
+    var addCategory : LinearLayout? = null
 
     init {
         categoryNameTextView = itemView.findViewById(R.id.categoryNameTextView_id)
         categoryCountTextView = itemView.findViewById(R.id.categoryCountTextView_id)
         categoryContainer = itemView.findViewById(R.id.category_row_container)
         categoryRoot = itemView.findViewById(R.id.category_row_root)
+        addCategory = itemView.findViewById(R.id.add_category)
     }
 
-    fun bindCategory(category: Category, isLast: Boolean) {
+    fun bindCategory(category: Category) {
 
         categoryCountTextView?.let {
-            it.text = "${Data.categoryList.count()}"
+            it.text = "${category.getTaskCount()}"
         }
         categoryNameTextView?.let {
             it.text = category.name
@@ -46,7 +44,7 @@ class CategoryViewHolder(rootLayout : LinearLayout) : RecyclerView.ViewHolder(ro
     }
 }
 
-class CategoryAdapter(val listener : ClickListener) : RecyclerView.Adapter<CategoryViewHolder>() {
+class CategoryAdapter(val listener : CategoryClickedListener) : RecyclerView.Adapter<CategoryViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val categoryRoot = LayoutInflater
@@ -59,14 +57,19 @@ class CategoryAdapter(val listener : ClickListener) : RecyclerView.Adapter<Categ
         val category = Data.categoryList[position]
 
         holder.categoryContainer?.setOnClickListener {
-            listener.onShortClick(position)
+            listener.onShortClick(holder.adapterPosition)
         }
 
         holder.categoryContainer?.setOnLongClickListener {
             //listener.onLongClick(position)
             true
         }
-        holder.bindCategory(category, position == Data.categoryList.count() - 1)
+
+        holder.addCategory?.setOnClickListener {
+            listener.onAddClick(holder.adapterPosition)
+        }
+
+        holder.bindCategory(category)
     }
 
     override fun getItemCount(): Int {

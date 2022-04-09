@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.vfs.todoapp_final.ClickListener
 import com.vfs.todoapp_final.R
 import com.vfs.todoapp_final.models.Category
 import com.vfs.todoapp_final.models.Data
@@ -59,7 +58,7 @@ class TaskFragment : Fragment() {
     }
 }
 
-fun TaskFragment.todoTaskListener() = object : ClickListener {
+fun TaskFragment.todoTaskListener() = object : TaskClickedListener {
 
     override fun onShortClick(index: Int) {
         todoTaskAdapter.notifyItemRemoved(index)
@@ -72,7 +71,7 @@ fun TaskFragment.todoTaskListener() = object : ClickListener {
     }
 }
 
-fun TaskFragment.finishedTaskListener() = object : ClickListener {
+fun TaskFragment.finishedTaskListener() = object : TaskClickedListener {
 
     override fun onShortClick(index: Int) {
         finishedTaskAdapter.notifyItemRemoved(index)

@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.vfs.todoapp_final.ClickListener
 import com.vfs.todoapp_final.R
 
-class TaskAdapter(category : Category, val listener : ClickListener, private val bTodoList :  Boolean) : RecyclerView.Adapter<TaskViewHolder>() {
+/**
+ * Adapter for to-do and finished task lists
+ */
+class TaskAdapter(category : Category, val listener : TaskClickedListener, private val bTodoList :  Boolean) : RecyclerView.Adapter<TaskViewHolder>() {
 
     // If displaying the to-do list of finished task list
     private var taskList : MutableList<Task> = if (bTodoList)

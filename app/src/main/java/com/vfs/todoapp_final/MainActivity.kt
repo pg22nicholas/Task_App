@@ -1,9 +1,9 @@
 package com.vfs.todoapp_final
 
-import android.app.Application
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.vfs.todoapp_final.models.Category
+import com.vfs.todoapp_final.categorylist.CategoryFragment
+import com.vfs.todoapp_final.categorylist.CategoryListener
 import com.vfs.todoapp_final.models.Data
 import com.vfs.todoapp_final.models.MyColor
 import com.vfs.todoapp_final.tasklist.TaskFragment

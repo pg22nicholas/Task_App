@@ -1,6 +1,6 @@
 package com.vfs.todoapp_final.models
 
-class Category(val name : String, taskList : MutableList<Task>, private var categoryColor : MyColor.CategoryColors = MyColor.CategoryColors.DEFAULT) {
+class Category(val name : String, private var categoryColor : MyColor.CategoryColors = MyColor.CategoryColors.DEFAULT, taskList : MutableList<Task> = mutableListOf()) {
 
     // Tasks that are not finished
     var todoTaskList : MutableList<Task> = taskList.filter { !it.bDone } as MutableList<Task>
@@ -35,6 +35,10 @@ class Category(val name : String, taskList : MutableList<Task>, private var cate
         finishedTaskList.removeAt(index)
         todoTaskList.add(task)
         return todoTaskList.size - 1
+    }
+
+    fun getTaskCount() : Int {
+        return todoTaskList.size + finishedTaskList.size
     }
 
     /**

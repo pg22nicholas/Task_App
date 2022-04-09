@@ -1,4 +1,4 @@
-package com.vfs.todoapp_final
+package com.vfs.todoapp_final.categorylist
 
 interface CategoryListener {
 

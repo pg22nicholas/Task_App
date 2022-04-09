@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 import com.vfs.todoapp_final.R
 import com.vfs.todoapp_final.models.Category
@@ -52,6 +53,17 @@ class TaskFragment : Fragment() {
         finishedTaskAdapter = TaskAdapter(selectedCategory, finishedTaskListener(), false)
         val finishedRV : RecyclerView = view.findViewById(R.id.rv_finished_task_list)
         finishedRV.adapter = finishedTaskAdapter
+
+        view.findViewById<Button>(R.id.button_remove_finished_tasks).setOnClickListener {
+            selectedCategory.removeAllFinishedTasks()
+            finishedTaskAdapter.notifyDataSetChanged()
+        }
+
+        view.findViewById<Button>(R.id.button_add_task).setOnClickListener {
+
+            taskListener.onEditTask(-1, Data.getCategoryIndex(selectedCategory))
+
+        }
     }
 
     companion object {

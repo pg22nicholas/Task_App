@@ -48,5 +48,9 @@ class Category(val name : String, private var categoryColor : MyColor.CategoryCo
     fun getHexColorInt() : Int {
         return MyColor.getCategoryHexColorInt(categoryColor)
     }
+
+    fun removeAllFinishedTasks() {
+        finishedTaskList.clear()
+    }
 }
 

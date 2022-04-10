@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity(), CategoryListener, EditTaskListener, Ta
 
     override fun onCategoryDeleted() {
         supportFragmentManager.popBackStack()
+        supportActionBar?.title = resources.getString(R.string.app_name)
     }
 
     override fun onEditTask(taskIndex: Int, categoryIndex: Int) {
@@ -69,5 +70,6 @@ class MainActivity : AppCompatActivity(), CategoryListener, EditTaskListener, Ta
 
     override fun onSaveClicked(taskIndex: Int, categoryIndex: Int) {
         supportFragmentManager.popBackStack()
+        supportActionBar?.title = resources.getString(R.string.app_name)
     }
 }

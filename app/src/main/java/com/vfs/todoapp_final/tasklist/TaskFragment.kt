@@ -1,8 +1,8 @@
 package com.vfs.todoapp_final.tasklist
 
+import android.app.AlertDialog
 import android.content.Context
-import android.graphics.ColorFilter
-import android.graphics.PorterDuff
+import android.content.DialogInterface
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.*
@@ -127,10 +127,20 @@ class TaskFragment : Fragment() {
         setMenuItemColor()
     }
 
-
     private fun deleteCategory() {
-        Data.categoryList.removeAt(Data.getCategoryIndex(selectedCategory))
-        taskListener.onCategoryDeleted()
+
+        AlertDialog.Builder(activity)
+            .setMessage("Do you want to delete " + selectedCategory.name + "?")
+            .setCancelable(true)
+            .setPositiveButton("Delete", DialogInterface.OnClickListener { dialogInterface, i ->
+                Data.categoryList.removeAt(Data.getCategoryIndex(selectedCategory))
+                taskListener.onCategoryDeleted()
+            })
+            .setNegativeButton("Cancel", DialogInterface.OnClickListener { dialogInterface, i ->
+                dialogInterface.cancel()
+            })
+            .create()
+            .show()
     }
 
     private fun sortListByPriority() {

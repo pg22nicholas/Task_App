@@ -19,6 +19,7 @@ class Category(val name : String, var categoryColor : MyColor.CategoryColors = M
     }
 
     /**
+     * Set a task as finished, moving it from to-do list to finished list
      * @param index index of task inside todoTaskList to move to finishedTaskList
      * @return      Index of task added to FinishedTaskList
      */
@@ -30,6 +31,7 @@ class Category(val name : String, var categoryColor : MyColor.CategoryColors = M
     }
 
     /**
+     * Set a task as to-do, moving it from finished list to to-do list
      * @param index index of task inside finishedTaskList to move to todoTaskList
      * @return      Index of task added to todoTaskList
      */

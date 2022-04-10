@@ -28,12 +28,11 @@ class MainActivity : AppCompatActivity(), CategoryListener, EditTaskListener, Ta
         Data.initTasks()
         MyColor.initiateColors(application)
 
-
-
         categoryFragment = CategoryFragment.newInstance();
         supportFragmentManager.beginTransaction()
             .add(R.id.fragment_container, categoryFragment)
             .commit()
+
     }
 
     override fun onCategorySelected(index: Int) {

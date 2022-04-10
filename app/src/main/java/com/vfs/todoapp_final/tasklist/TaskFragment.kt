@@ -144,8 +144,8 @@ class TaskFragment : Fragment() {
     }
 
     private fun sortListByPriority() {
-        selectedCategory.todoTaskList.sortBy { it.priorityColor }
-        selectedCategory.finishedTaskList.sortBy { it.priorityColor }
+        selectedCategory.todoTaskList.sortByDescending { it.priorityColor }
+        selectedCategory.finishedTaskList.sortByDescending { it.priorityColor }
         finishedTaskAdapter.notifyDataSetChanged()
         todoTaskAdapter.notifyDataSetChanged()
     }
@@ -178,8 +178,8 @@ fun TaskFragment.todoTaskListener() = object : TaskClickedListener {
 
     // Set to-do task as finished
     override fun onShortClick(index: Int) {
-        todoTaskAdapter.notifyItemRemoved(index)
         val insertIndex = selectedCategory.setTaskFinished(index)
+        todoTaskAdapter.notifyItemRemoved(index)
         finishedTaskAdapter.notifyItemInserted(insertIndex)
     }
 
@@ -193,8 +193,8 @@ fun TaskFragment.finishedTaskListener() = object : TaskClickedListener {
 
     // Set finished task as to-do
     override fun onShortClick(index: Int) {
-        finishedTaskAdapter.notifyItemRemoved(index)
         val insertIndex = selectedCategory.setTaskTodo(index)
+        finishedTaskAdapter.notifyItemRemoved(index)
         todoTaskAdapter.notifyItemInserted(insertIndex)
     }
 

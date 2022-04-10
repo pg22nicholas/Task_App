@@ -8,13 +8,10 @@
 
         <menu>
             <item
-                android:id="@+id/task_list_sort_priority"
-                android:title="Priority"/>
-            <item
-                android:id="@+id/task_list_sort_alphabetical_ascending"
+                android:id="@+id/category_list_sort_alphabetical_ascending"
                 android:title="Ascending"/>
             <item
-                android:id="@+id/task_list_sort_alphabetical_descending"
+                android:id="@+id/category_list_sort_alphabetical_descending"
                 android:title="Descending"/>
         </menu>
 

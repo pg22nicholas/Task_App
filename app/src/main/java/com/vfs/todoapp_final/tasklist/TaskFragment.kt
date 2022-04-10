@@ -56,8 +56,11 @@ class TaskFragment : Fragment() {
             R.id.task_list_sort_priority -> {
                 sortListByPriority()
             }
-            R.id.task_list_sort_alphabetical -> {
-                sortListByAlphabetical()
+            R.id.task_list_sort_alphabetical_ascending -> {
+                sortListByAlphabetical(true)
+            }
+            R.id.task_list_sort_alphabetical_descending -> {
+                sortListByAlphabetical(false)
             }
         }
 
@@ -71,9 +74,15 @@ class TaskFragment : Fragment() {
         todoTaskAdapter.notifyDataSetChanged()
     }
 
-    private fun sortListByAlphabetical() {
-        selectedCategory.todoTaskList.sortBy { it.name }
-        selectedCategory.finishedTaskList.sortBy { it.name }
+    private fun sortListByAlphabetical(isAscending : Boolean) {
+        if (isAscending) {
+            selectedCategory.todoTaskList.sortBy { it.name }
+            selectedCategory.finishedTaskList.sortBy { it.name }
+        } else {
+            selectedCategory.todoTaskList.sortByDescending { it.name }
+            selectedCategory.finishedTaskList.sortByDescending { it.name }
+        }
+
         finishedTaskAdapter.notifyDataSetChanged()
         todoTaskAdapter.notifyDataSetChanged()
     }

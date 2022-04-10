@@ -4,10 +4,8 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.vfs.todoapp_final.CategoryAdapter
@@ -30,6 +28,7 @@ class CategoryFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -96,6 +95,34 @@ class CategoryFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() = CategoryFragment()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.category_list_toolbar_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.category_list_sort_alphabetical_ascending -> {
+                sortListByAlphabetical(true)
+            }
+            R.id.category_list_sort_alphabetical_descending-> {
+                sortListByAlphabetical(false)
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun sortListByAlphabetical(isAscending : Boolean) {
+        if (isAscending) {
+            Data.categoryList.sortBy { it.name }
+        } else {
+            Data.categoryList.sortByDescending { it.name }
+        }
+
+        categoryAdapter.notifyDataSetChanged()
     }
 
     private fun createAddCategoryDialog() {

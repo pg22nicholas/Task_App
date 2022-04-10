@@ -12,14 +12,14 @@
 
     <color name="category_default">#c7c7c9</color>
     <color name="category_red">#c16c6d</color>
-    <color name="category_yellow">#c1bd6c</color>
+    <color name="category_yellow">#DCD5C334</color>
     <color name="category_blue">#6c94c1</color>
     <color name="category_green">#75c16c</color>
 
     <color name="priority_none">#c7c7c9</color>
-    <color name="priority_low">#75c16c</color>
-    <color name="priority_medium">#c1bd6c</color>
-    <color name="priority_high">#c16c6d</color>
+    <color name="priority_low">#23C510</color>
+    <color name="priority_medium">#DCEFD709</color>
+    <color name="priority_high">#CF1114</color>
 
     <color name="task_background_finished">#C6C6C6</color>
 

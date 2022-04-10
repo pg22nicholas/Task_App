@@ -53,7 +53,10 @@ class MainActivity : AppCompatActivity(), CategoryListener, EditTaskListener, Ta
     }
 
     override fun onEditTask(taskIndex: Int, categoryIndex: Int) {
-        supportActionBar?.title = "Edit Task"
+        if (taskIndex < 0)
+            supportActionBar?.title = "Add Task"
+        else
+            supportActionBar?.title = "Edit Task"
 
         // Create and start edit task fragment
         editTaskFragment = EditTaskFragment.newInstance(taskIndex, categoryIndex)

@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/category_menu_color_picker"
+    android:icon="@android:drawable/ic_menu_edit"
+    android:title="color"
+    app:showAsAction="always">
+
+        <menu>
+            <item
+                android:id="@+id/category_menu_color_default"
+                android:title="Default"/>
+            <item
+                android:id="@+id/category_menu_color_red"
+                android:title="Red"/>
+            <item
+                android:id="@+id/category_menu_color_blue"
+                android:title="Blue"/>
+            <item
+                android:id="@+id/category_menu_color_yellow"
+                android:title="Yellow"/>
+            <item
+                android:id="@+id/category_menu_color_green"
+                android:title="Green"/>
+        </menu>
+
+    </item>
+
     <item android:id="@+id/task_list_sort"
         android:icon="@android:drawable/ic_menu_sort_by_size"
         android:title="sort"
@@ -17,6 +43,12 @@
                 android:id="@+id/task_list_sort_alphabetical_descending"
                 android:title="Descending"/>
         </menu>
-
     </item>
+
+    <item android:id="@+id/category_menu_delete"
+        android:icon="@android:drawable/ic_menu_delete"
+        android:title="delete"
+        app:showAsAction="always"/>
+
+
 </menu>

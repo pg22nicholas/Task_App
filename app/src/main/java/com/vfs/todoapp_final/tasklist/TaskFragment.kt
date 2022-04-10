@@ -1,6 +1,9 @@
 package com.vfs.todoapp_final.tasklist
 
 import android.content.Context
+import android.graphics.ColorFilter
+import android.graphics.PorterDuff
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -9,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.vfs.todoapp_final.R
 import com.vfs.todoapp_final.models.Category
 import com.vfs.todoapp_final.models.Data
+import com.vfs.todoapp_final.models.MyColor
 
 /**
  * Fragment for displaying a list of tasks inside a category
@@ -20,6 +24,7 @@ class TaskFragment : Fragment() {
     lateinit var todoTaskAdapter : TaskAdapter
     lateinit var finishedTaskAdapter : TaskAdapter
     lateinit var taskListener : TaskListener
+    lateinit var taskbarMenu : Menu
 
     lateinit var selectedCategory: Category
 
@@ -39,52 +44,6 @@ class TaskFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_task, container, false)
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        taskListener = context as TaskListener
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.task_list_toolbar_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.task_list_sort_priority -> {
-                sortListByPriority()
-            }
-            R.id.task_list_sort_alphabetical_ascending -> {
-                sortListByAlphabetical(true)
-            }
-            R.id.task_list_sort_alphabetical_descending -> {
-                sortListByAlphabetical(false)
-            }
-        }
-
-        return super.onOptionsItemSelected(item)
-    }
-
-    private fun sortListByPriority() {
-        selectedCategory.todoTaskList.sortBy { it.priorityColor }
-        selectedCategory.finishedTaskList.sortBy { it.priorityColor }
-        finishedTaskAdapter.notifyDataSetChanged()
-        todoTaskAdapter.notifyDataSetChanged()
-    }
-
-    private fun sortListByAlphabetical(isAscending : Boolean) {
-        if (isAscending) {
-            selectedCategory.todoTaskList.sortBy { it.name }
-            selectedCategory.finishedTaskList.sortBy { it.name }
-        } else {
-            selectedCategory.todoTaskList.sortByDescending { it.name }
-            selectedCategory.finishedTaskList.sortByDescending { it.name }
-        }
-
-        finishedTaskAdapter.notifyDataSetChanged()
-        todoTaskAdapter.notifyDataSetChanged()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -110,6 +69,88 @@ class TaskFragment : Fragment() {
         view.findViewById<Button>(R.id.button_add_task).setOnClickListener {
             taskListener.onEditTask(-1, Data.getCategoryIndex(selectedCategory))
         }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        taskListener = context as TaskListener
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.task_list_toolbar_menu, menu)
+        taskbarMenu = menu
+        setMenuItemColor()
+    }
+
+    private fun setMenuItemColor() {
+        val colorPickerDrawable : Drawable = taskbarMenu.findItem(R.id.category_menu_color_picker).icon
+        colorPickerDrawable.setTint(MyColor.getCategoryHexColorInt(selectedCategory.categoryColor))
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.task_list_sort_priority -> {
+                sortListByPriority()
+            }
+            R.id.task_list_sort_alphabetical_ascending -> {
+                sortListByAlphabetical(true)
+            }
+            R.id.task_list_sort_alphabetical_descending -> {
+                sortListByAlphabetical(false)
+            }
+            R.id.category_menu_delete -> {
+                deleteCategory()
+            }
+            R.id.category_menu_color_default -> {
+                onNewColorSelected(MyColor.CategoryColors.DEFAULT)
+            }
+            R.id.category_menu_color_red -> {
+                onNewColorSelected(MyColor.CategoryColors.RED)
+            }
+            R.id.category_menu_color_blue -> {
+                onNewColorSelected(MyColor.CategoryColors.BLUE)
+            }
+            R.id.category_menu_color_yellow -> {
+                onNewColorSelected(MyColor.CategoryColors.YELLOW)
+            }
+            R.id.category_menu_color_green -> {
+                onNewColorSelected(MyColor.CategoryColors.GREEN)
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun onNewColorSelected(color : MyColor.CategoryColors) {
+        selectedCategory.categoryColor = color
+        setMenuItemColor()
+    }
+
+
+    private fun deleteCategory() {
+        Data.categoryList.removeAt(Data.getCategoryIndex(selectedCategory))
+        taskListener.onCategoryDeleted()
+    }
+
+    private fun sortListByPriority() {
+        selectedCategory.todoTaskList.sortBy { it.priorityColor }
+        selectedCategory.finishedTaskList.sortBy { it.priorityColor }
+        finishedTaskAdapter.notifyDataSetChanged()
+        todoTaskAdapter.notifyDataSetChanged()
+    }
+
+    private fun sortListByAlphabetical(isAscending : Boolean) {
+        if (isAscending) {
+            selectedCategory.todoTaskList.sortBy { it.name }
+            selectedCategory.finishedTaskList.sortBy { it.name }
+        } else {
+            selectedCategory.todoTaskList.sortByDescending { it.name }
+            selectedCategory.finishedTaskList.sortByDescending { it.name }
+        }
+
+        finishedTaskAdapter.notifyDataSetChanged()
+        todoTaskAdapter.notifyDataSetChanged()
     }
 
     companion object {

@@ -47,6 +47,10 @@ class MainActivity : AppCompatActivity(), CategoryListener, EditTaskListener, Ta
             .commit()
     }
 
+    override fun onCategoryDeleted() {
+        supportFragmentManager.popBackStack()
+    }
+
     override fun onEditTask(taskIndex: Int, categoryIndex: Int) {
         supportActionBar?.title = "Edit Task"
 

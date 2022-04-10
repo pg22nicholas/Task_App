@@ -7,4 +7,5 @@ import com.vfs.todoapp_final.EnterEditTaskListener
  */
 interface TaskListener : EnterEditTaskListener {
 
+    fun onCategoryDeleted()
 }

@@ -58,7 +58,7 @@ class CategoryFragment : Fragment() {
             R.array.category_color_array,
             android.R.layout.simple_spinner_item
         ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
+            // layout to use for dropdown
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             // Apply the adapter to the spinner
             spinner.adapter = adapter

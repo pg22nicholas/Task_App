@@ -9,6 +9,7 @@ import com.vfs.todoapp_final.models.Category
 import com.vfs.todoapp_final.models.Data
 import android.graphics.drawable.GradientDrawable
 import com.vfs.todoapp_final.categorylist.CategoryClickedListener
+import com.vfs.todoapp_final.models.MyColor
 
 /**
  * ViewHolder for displaying the list of categories
@@ -17,22 +18,31 @@ class CategoryViewHolder(rootLayout : LinearLayout) : RecyclerView.ViewHolder(ro
 
     var categoryNameTextView : TextView? = null
     var categoryCountTextView : TextView? = null
+    var categoryHighPriorityCount : TextView? = null
     var categoryContainer : LinearLayout? = null
     var categoryRoot: LinearLayout? = null
     var addCategory : LinearLayout? = null
 
+
     init {
-        categoryNameTextView = itemView.findViewById(R.id.categoryNameTextView_id)
-        categoryCountTextView = itemView.findViewById(R.id.categoryCountTextView_id)
+        categoryNameTextView = itemView.findViewById(R.id.text_category_name)
+        categoryCountTextView = itemView.findViewById(R.id.text_category_task_count)
+        categoryHighPriorityCount = itemView.findViewById(R.id.text_category_high_priority_count)
         categoryContainer = itemView.findViewById(R.id.category_row_container)
         categoryRoot = itemView.findViewById(R.id.category_row_root)
         addCategory = itemView.findViewById(R.id.add_category)
+
     }
 
     fun bindCategory(category: Category) {
 
+        // display number
         categoryCountTextView?.let {
             it.text = "${category.getTaskCount()}"
+        }
+        // Display number of high priority tasks not finished
+        categoryHighPriorityCount?.let {
+            it.text = "${category.todoTaskList.filter { task -> task.priorityColor == MyColor.PriorityColors.HIGH }.size}"
         }
         categoryNameTextView?.let {
             it.text = category.name
@@ -63,7 +73,6 @@ class CategoryAdapter(val listener : CategoryClickedListener) : RecyclerView.Ada
         }
 
         holder.categoryContainer?.setOnLongClickListener {
-            //listener.onLongClick(position)
             true
         }
 

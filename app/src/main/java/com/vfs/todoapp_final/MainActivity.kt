@@ -2,6 +2,7 @@ package com.vfs.todoapp_final
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import com.vfs.todoapp_final.categorylist.CategoryFragment
 import com.vfs.todoapp_final.categorylist.CategoryListener
 import com.vfs.todoapp_final.models.Data
@@ -27,6 +28,8 @@ class MainActivity : AppCompatActivity(), CategoryListener, EditTaskListener, Ta
         Data.initTasks()
         MyColor.initiateColors(application)
 
+
+
         categoryFragment = CategoryFragment.newInstance();
         supportFragmentManager.beginTransaction()
             .add(R.id.fragment_container, categoryFragment)
@@ -34,6 +37,9 @@ class MainActivity : AppCompatActivity(), CategoryListener, EditTaskListener, Ta
     }
 
     override fun onCategorySelected(index: Int) {
+        supportActionBar?.title = "Category: " + Data.categoryList[index].name
+
+        // create and start task list fragment
         taskFragment = TaskFragment.newInstance(index)
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, taskFragment)
@@ -42,11 +48,19 @@ class MainActivity : AppCompatActivity(), CategoryListener, EditTaskListener, Ta
     }
 
     override fun onEditTask(taskIndex: Int, categoryIndex: Int) {
+        supportActionBar?.title = "Edit Task"
+
+        // Create and start edit task fragment
         editTaskFragment = EditTaskFragment.newInstance(taskIndex, categoryIndex)
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, editTaskFragment)
             .addToBackStack(null)
             .commit()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        supportActionBar?.title = resources.getString(R.string.app_name)
     }
 
     override fun onSaveClicked(taskIndex: Int, categoryIndex: Int) {

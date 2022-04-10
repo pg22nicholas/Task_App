@@ -34,5 +34,4 @@ class Task(var name : String) {
     fun getHexColorInt() : Int {
         return MyColor.getPriorityHexColorInt(priorityColor)
     }
-
 }

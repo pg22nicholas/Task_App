@@ -2,10 +2,8 @@ package com.vfs.todoapp_final.tasklist
 
 import android.content.Context
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 import com.vfs.todoapp_final.R
@@ -31,6 +29,8 @@ class TaskFragment : Fragment() {
             val categoryIndex : Int = it.getInt(ARG_CATEGORY)
             selectedCategory = Data.categoryList[categoryIndex]
         }
+
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -44,6 +44,38 @@ class TaskFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         taskListener = context as TaskListener
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.task_list_toolbar_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.task_list_sort_priority -> {
+                sortListByPriority()
+            }
+            R.id.task_list_sort_alphabetical -> {
+                sortListByAlphabetical()
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun sortListByPriority() {
+        selectedCategory.todoTaskList.sortBy { it.priorityColor }
+        selectedCategory.finishedTaskList.sortBy { it.priorityColor }
+        finishedTaskAdapter.notifyDataSetChanged()
+        todoTaskAdapter.notifyDataSetChanged()
+    }
+
+    private fun sortListByAlphabetical() {
+        selectedCategory.todoTaskList.sortBy { it.name }
+        selectedCategory.finishedTaskList.sortBy { it.name }
+        finishedTaskAdapter.notifyDataSetChanged()
+        todoTaskAdapter.notifyDataSetChanged()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

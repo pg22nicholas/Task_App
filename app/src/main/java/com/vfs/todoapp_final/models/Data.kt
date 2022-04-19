@@ -44,11 +44,9 @@ class Data {
             }
         }
 
-        fun SaveData() {
-
+        fun saveData() {
+            FileStorage.create(application, Json.encodeToString(categoryList))
         }
-
-
 
         fun addCategory(categoryToAdd : Category) {
             categoryList.add(categoryToAdd)

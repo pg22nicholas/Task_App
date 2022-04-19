@@ -1,6 +1,9 @@
 package com.vfs.todoapp_final.models
 
+import android.util.Log
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 /**
  * Model for representing a Category of tasks
@@ -9,13 +12,12 @@ import kotlinx.serialization.Serializable
 class Category(val name : String, var categoryColor : MyColor.CategoryColors = MyColor.CategoryColors.DEFAULT) {
 
     // Tasks that are not finished
-    lateinit var todoTaskList : MutableList<Task>
+    var todoTaskList : MutableList<Task> = mutableListOf()
 
     // Tasks that are finished
-    lateinit var finishedTaskList : MutableList<Task>
+    var finishedTaskList : MutableList<Task> = mutableListOf()
 
     constructor(name : String, categoryColor : MyColor.CategoryColors = MyColor.CategoryColors.DEFAULT, taskList : MutableList<Task> = mutableListOf()) : this(name, categoryColor) {
-
         todoTaskList = taskList.filter { !it.bDone } as MutableList<Task>
         finishedTaskList = taskList.filter { it.bDone } as MutableList<Task>
     }
@@ -25,6 +27,7 @@ class Category(val name : String, var categoryColor : MyColor.CategoryColors = M
      */
     fun addTask(task : Task) {
         todoTaskList.add(task)
+        Data.saveData()
     }
 
     /**
@@ -36,6 +39,7 @@ class Category(val name : String, var categoryColor : MyColor.CategoryColors = M
         val task : Task = todoTaskList[index]
         todoTaskList.removeAt(index)
         finishedTaskList.add(task)
+        Data.saveData()
         return finishedTaskList.size - 1
     }
 
@@ -48,6 +52,7 @@ class Category(val name : String, var categoryColor : MyColor.CategoryColors = M
         val task : Task = finishedTaskList[index]
         finishedTaskList.removeAt(index)
         todoTaskList.add(task)
+        Data.saveData()
         return todoTaskList.size - 1
     }
 
@@ -65,6 +70,7 @@ class Category(val name : String, var categoryColor : MyColor.CategoryColors = M
 
     fun removeAllFinishedTasks() {
         finishedTaskList.clear()
+        Data.saveData()
     }
 }
 

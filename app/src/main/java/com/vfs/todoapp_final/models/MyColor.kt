@@ -3,6 +3,7 @@ package com.vfs.todoapp_final.models
 import android.app.Application
 import android.content.Context
 import com.vfs.todoapp_final.R
+import kotlinx.serialization.Serializable
 
 /**
  * Deals with retrieving the colors for tasks and categories
@@ -72,6 +73,7 @@ class MyColor {
     /**
      * Possible category colors
      */
+    @Serializable
     enum class CategoryColors {
         DEFAULT,
         RED,
@@ -83,6 +85,7 @@ class MyColor {
     /**
      * Possible category colors
      */
+    @Serializable
     enum class PriorityColors {
         NONE,
         LOW,

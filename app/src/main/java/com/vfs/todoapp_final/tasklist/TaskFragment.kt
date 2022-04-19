@@ -189,6 +189,8 @@ fun TaskFragment.todoTaskListener() = object : TaskClickedListener {
     }
 }
 
+
+
 fun TaskFragment.finishedTaskListener() = object : TaskClickedListener {
 
     // Set finished task as to-do

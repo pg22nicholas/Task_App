@@ -1,5 +1,7 @@
 package com.vfs.todoapp_final.models
 
+import android.app.Application
+
 /**
  * Singleton class for holding all categories and their tasks
  */
@@ -7,6 +9,16 @@ class Data {
 
     companion object {
         val categoryList : MutableList<Category> = mutableListOf();
+
+        lateinit var application : Application;
+
+        fun initiateData(application: Application) {
+            this.application = application
+
+            /*if (!FileStorage.isFilePresent(application)) {
+                FileStorage.create(application, )
+            }*/
+        }
 
         fun initTasks() {
 

@@ -1,10 +1,12 @@
 package com.vfs.todoapp_final.models
 
+import kotlinx.serialization.Serializable
 import kotlin.properties.Delegates
 
 /**
  * Model representing a single task
  */
+@Serializable
 class Task(var name : String) {
 
     var priorityColor : MyColor.PriorityColors = MyColor.PriorityColors.NONE

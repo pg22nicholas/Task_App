@@ -2,7 +2,7 @@ package com.vfs.todoapp_final
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
+import android.util.Log
 import com.vfs.todoapp_final.categorylist.CategoryFragment
 import com.vfs.todoapp_final.categorylist.CategoryListener
 import com.vfs.todoapp_final.models.Data
@@ -11,6 +11,8 @@ import com.vfs.todoapp_final.taskedit.EditTaskFragment
 import com.vfs.todoapp_final.taskedit.EditTaskListener
 import com.vfs.todoapp_final.tasklist.TaskFragment
 import com.vfs.todoapp_final.tasklist.TaskListener
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 /**
  * Main Activity for displaying Categories and their tasks
@@ -32,6 +34,8 @@ class MainActivity : AppCompatActivity(), CategoryListener, EditTaskListener, Ta
         supportFragmentManager.beginTransaction()
             .add(R.id.fragment_container, categoryFragment)
             .commit()
+
+        Log.i("test", Json.encodeToString(Data.categoryList[0]))
 
     }
 

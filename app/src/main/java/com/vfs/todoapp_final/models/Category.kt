@@ -1,15 +1,24 @@
 package com.vfs.todoapp_final.models
 
+import kotlinx.serialization.Serializable
+
 /**
  * Model for representing a Category of tasks
  */
-class Category(val name : String, var categoryColor : MyColor.CategoryColors = MyColor.CategoryColors.DEFAULT, taskList : MutableList<Task> = mutableListOf()) {
+@Serializable
+class Category(val name : String, var categoryColor : MyColor.CategoryColors = MyColor.CategoryColors.DEFAULT) {
 
     // Tasks that are not finished
-    var todoTaskList : MutableList<Task> = taskList.filter { !it.bDone } as MutableList<Task>
+    lateinit var todoTaskList : MutableList<Task>
 
     // Tasks that are finished
-    var finishedTaskList : MutableList<Task> = taskList.filter { it.bDone } as MutableList<Task>
+    lateinit var finishedTaskList : MutableList<Task>
+
+    constructor(name : String, categoryColor : MyColor.CategoryColors = MyColor.CategoryColors.DEFAULT, taskList : MutableList<Task> = mutableListOf()) : this(name, categoryColor) {
+
+        todoTaskList = taskList.filter { !it.bDone } as MutableList<Task>
+        finishedTaskList = taskList.filter { it.bDone } as MutableList<Task>
+    }
 
     /**
      * @param task  New task to add to to-do list

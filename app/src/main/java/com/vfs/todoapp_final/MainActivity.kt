@@ -27,16 +27,13 @@ class MainActivity : AppCompatActivity(), CategoryListener, EditTaskListener, Ta
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Data.initTasks()
+        Data.initiateData(application)
         MyColor.initiateColors(application)
 
         categoryFragment = CategoryFragment.newInstance();
         supportFragmentManager.beginTransaction()
             .add(R.id.fragment_container, categoryFragment)
             .commit()
-
-        Log.i("test", Json.encodeToString(Data.categoryList[0]))
-
     }
 
     override fun onCategorySelected(index: Int) {

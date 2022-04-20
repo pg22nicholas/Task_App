@@ -3,6 +3,7 @@ package com.vfs.todoapp_final
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import com.vfs.todoapp_final.categorylist.CategoryFragment
 import com.vfs.todoapp_final.categorylist.CategoryListener
 import com.vfs.todoapp_final.models.Data
@@ -13,6 +14,10 @@ import com.vfs.todoapp_final.tasklist.TaskFragment
 import com.vfs.todoapp_final.tasklist.TaskListener
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import androidx.annotation.NonNull
+
+
+
 
 /**
  * Main Activity for displaying Categories and their tasks
@@ -38,6 +43,7 @@ class MainActivity : AppCompatActivity(), CategoryListener, EditTaskListener, Ta
 
     override fun onCategorySelected(index: Int) {
         supportActionBar?.title = "Category: " + Data.categoryList[index].name
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         // create and start task list fragment
         taskFragment = TaskFragment.newInstance(index)
@@ -74,5 +80,16 @@ class MainActivity : AppCompatActivity(), CategoryListener, EditTaskListener, Ta
     override fun onSaveClicked(taskIndex: Int, categoryIndex: Int) {
         supportFragmentManager.popBackStack()
         supportActionBar?.title = resources.getString(R.string.app_name)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            android.R.id.home -> {
+                Log.i("test", "test")
+                super.onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

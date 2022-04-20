@@ -23,6 +23,13 @@ class Task(var name : String) {
         this.priorityColor = priorityColor
     }
 
+    fun updateTask(name: String, priorityColor : MyColor.PriorityColors) {
+        this.name = name
+        this.priorityColor = priorityColor
+        Data.saveData()
+    }
+
+
 
     fun flipSelected() : Boolean {
         bDone = !bDone

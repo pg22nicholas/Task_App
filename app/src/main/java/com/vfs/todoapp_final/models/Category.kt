@@ -9,7 +9,15 @@ import kotlinx.serialization.json.Json
  * Model for representing a Category of tasks
  */
 @Serializable
-class Category(val name : String, var categoryColor : MyColor.CategoryColors = MyColor.CategoryColors.DEFAULT) {
+class Category(val name : String, var color : MyColor.CategoryColors = MyColor.CategoryColors.DEFAULT) {
+
+    var categoryColor : MyColor.CategoryColors = color
+        get() = field
+        set(value) {
+            field = value
+            Data.saveData()
+        }
+
 
     // Tasks that are not finished
     var todoTaskList : MutableList<Task> = mutableListOf()
@@ -24,11 +32,33 @@ class Category(val name : String, var categoryColor : MyColor.CategoryColors = M
 
     /**
      * @param task  New task to add to to-do list
+     * @return  Data.VALID_NAME_RETURNS that details if the add was successful, or why is failed
      */
-    fun addTask(task : Task) {
-        todoTaskList.add(task)
-        Data.saveData()
+    fun addTask(task : Task) : Data.VALID_NAME_RETURNS {
+        if (isTaskNameExistInCategory(task.name)) {
+            return Data.VALID_NAME_RETURNS.NOT_UNIQUE
+        }
+
+        val nameCheck = Data.nameStringCheck(task.name)
+        if (nameCheck == Data.VALID_NAME_RETURNS.VALID) {
+            todoTaskList.add(task)
+            Data.saveData()
+        }
+        return nameCheck
     }
+
+    /**
+     * Check if the task name already exists inside the category
+     * @return  true if task exists in the category
+     */
+    fun isTaskNameExistInCategory(taskNameToAdd : String) : Boolean {
+        for (task in todoTaskList + finishedTaskList) {
+            if (taskNameToAdd == task.name)
+                return true
+        }
+        return false
+    }
+
 
     /**
      * Set a task as finished, moving it from to-do list to finished list
@@ -72,5 +102,6 @@ class Category(val name : String, var categoryColor : MyColor.CategoryColors = M
         finishedTaskList.clear()
         Data.saveData()
     }
+
 }
 

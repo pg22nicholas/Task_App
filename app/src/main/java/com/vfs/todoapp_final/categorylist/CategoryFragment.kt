@@ -130,12 +130,11 @@ class CategoryFragment : Fragment() {
     }
 
     private fun addNewCategory(name : String, color : MyColor.CategoryColors) {
-        if (!name.isEmpty()) {
-            Data.addCategory(Category(name, color))
+        val validityOfName = Data.addCategory(Category(name, color))
+        if (validityOfName == Data.VALID_NAME_RETURNS.VALID)
             categoryAdapter.notifyItemInserted(Data.categoryList.size - 1)
-        }
         else
-            Toast.makeText(context, "Can't have empty name", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, Data.createAddFailMessage(validityOfName), Toast.LENGTH_LONG).show()
     }
 }
 

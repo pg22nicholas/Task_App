@@ -31,7 +31,7 @@ class FileStorage {
         }
 
         /**
-         *
+         * Create/override task json file
          */
         fun create(context: Context, jsonString: String?): Boolean {
 
@@ -49,6 +49,9 @@ class FileStorage {
             }
         }
 
+        /**
+         * Check if the task json file exists
+         */
         fun isFilePresent(context: Context): Boolean {
             val path: String = context.getFilesDir().getAbsolutePath().toString() + "/" + FILENAME
             val file = File(path)

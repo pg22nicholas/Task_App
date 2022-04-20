@@ -133,7 +133,7 @@ class TaskFragment : Fragment() {
             .setMessage("Do you want to delete " + selectedCategory.name + "?")
             .setCancelable(true)
             .setPositiveButton("Delete", DialogInterface.OnClickListener { dialogInterface, i ->
-                Data.categoryList.removeAt(Data.getCategoryIndex(selectedCategory))
+                Data.removeCategory(selectedCategory)
                 taskListener.onCategoryDeleted()
             })
             .setNegativeButton("Cancel", DialogInterface.OnClickListener { dialogInterface, i ->

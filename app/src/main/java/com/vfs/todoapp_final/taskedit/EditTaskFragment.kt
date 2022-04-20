@@ -41,7 +41,6 @@ class EditTaskFragment : Fragment() {
                 task = Task("")
             } else {
                 task = category.todoTaskList[taskIndex]
-
             }
         }
     }
@@ -80,22 +79,43 @@ class EditTaskFragment : Fragment() {
 
             val name : String = view.findViewById<EditText>(R.id.text_edit_task).text.toString()
 
-            // Prevent saving/creating a task with an empty name
-            if (name.isEmpty()) {
-                Toast.makeText(context, "Task cannot have an empty name", Toast.LENGTH_LONG).show()
-            } else {
-                // Save the task
-                task.name = name
-                    task.priorityColor = MyColor.PriorityColors.values()[spinner.selectedItemPosition]
+            // If updating existing task
+            if (taskIndex > 0) {
+                // if only updating priority, no checks needed
+                if (name == task.name) {
+                    task.updateTask(
+                        task.name,
+                        MyColor.PriorityColors.values()[spinner.selectedItemPosition]
+                    )
+                    listener.onSaveClicked(taskIndex, categoryIndex)
+                    return@setOnClickListener
+                    // if updating name, make sure the name is unique from other tasks in category
+                } else if (!category.isTaskNameExistInCategory(name)) {
+                    task.updateTask(
+                        name,
+                        MyColor.PriorityColors.values()[spinner.selectedItemPosition]
+                    )
+                    listener.onSaveClicked(taskIndex, categoryIndex)
+                    return@setOnClickListener
+                }
 
+            }
+
+            // Try adding new task
+            task.name = name
+            task.priorityColor = MyColor.PriorityColors.values()[spinner.selectedItemPosition]
+
+            val validityOfName = category.addTask(task)
+            if (validityOfName == Data.VALID_NAME_RETURNS.VALID) {
                 if (taskIndex < 0) {
                     category.addTask(task)
                     taskIndex = category.todoTaskList.size
                 }
                 listener.onSaveClicked(taskIndex, categoryIndex)
+            } else {
+                // Failed adding a task / editing task
+                Toast.makeText(context, Data.createAddFailMessage(validityOfName), Toast.LENGTH_LONG).show()
             }
-
-
         }
 
         spinner.setSelection(task.priorityColor.ordinal)

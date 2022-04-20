@@ -42,8 +42,8 @@ class MainActivity : AppCompatActivity(), CategoryListener, EditTaskListener, Ta
     }
 
     override fun onCategorySelected(index: Int) {
-        supportActionBar?.title = "Category: " + Data.categoryList[index].name
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = "Category: " + Data.categoryList[index].name
 
         // create and start task list fragment
         taskFragment = TaskFragment.newInstance(index)
@@ -59,6 +59,7 @@ class MainActivity : AppCompatActivity(), CategoryListener, EditTaskListener, Ta
     }
 
     override fun onEditTask(taskIndex: Int, categoryIndex: Int) {
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         if (taskIndex < 0)
             supportActionBar?.title = "Add Task"
         else
@@ -75,18 +76,25 @@ class MainActivity : AppCompatActivity(), CategoryListener, EditTaskListener, Ta
     override fun onBackPressed() {
         super.onBackPressed()
         supportActionBar?.title = resources.getString(R.string.app_name)
+        checkShowHomeUpButton()
     }
 
     override fun onSaveClicked(taskIndex: Int, categoryIndex: Int) {
         supportFragmentManager.popBackStack()
         supportActionBar?.title = resources.getString(R.string.app_name)
+        checkShowHomeUpButton()
+    }
+
+    // Hide HomeUp button if category list is visible
+    private fun checkShowHomeUpButton() {
+        supportActionBar?.setDisplayHomeAsUpEnabled(!categoryFragment.isVisible)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.getItemId()) {
             android.R.id.home -> {
-                Log.i("test", "test")
                 super.onBackPressed()
+                checkShowHomeUpButton()
                 return true
             }
         }

@@ -4,6 +4,9 @@ import android.content.Context
 import java.io.*
 import java.lang.StringBuilder
 
+/**
+ * Deals with saving and loading serialized JSON data to and from device storage
+ */
 class FileStorage {
 
     companion object {

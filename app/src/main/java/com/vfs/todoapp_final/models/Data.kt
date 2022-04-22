@@ -21,7 +21,7 @@ class Data {
         fun initiateData(application: Application) {
             this.application = application
 
-            // Initiate starting data if task json file doesnt exist
+            // Initiate starting data if task json file doesn't exist
             if (!FileStorage.isFilePresent(application)) {
                 val Task1 = Task("game1", MyColor.PriorityColors.HIGH)
 

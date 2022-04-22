@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity(), CategoryListener, EditTaskListener, Ta
         // create and start task list fragment
         taskFragment = TaskFragment.newInstance(index)
         supportFragmentManager.beginTransaction()
+            .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
             .replace(R.id.fragment_container, taskFragment)
             .addToBackStack(null)
             .commit()
@@ -68,6 +69,7 @@ class MainActivity : AppCompatActivity(), CategoryListener, EditTaskListener, Ta
         // Create and start edit task fragment
         editTaskFragment = EditTaskFragment.newInstance(taskIndex, categoryIndex)
         supportFragmentManager.beginTransaction()
+            .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
             .replace(R.id.fragment_container, editTaskFragment)
             .addToBackStack(null)
             .commit()

@@ -17,9 +17,11 @@
     <Spinner
         android:id="@+id/spinner_category_colors"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:drawable/btn_dropdown"
+        android:layout_height="40dp"
+        android:background="@drawable/spinner_button"
         android:spinnerMode="dropdown"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         tools:listitem=""/>
 
 </LinearLayout>

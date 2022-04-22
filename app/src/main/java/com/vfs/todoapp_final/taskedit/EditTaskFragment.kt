@@ -1,7 +1,9 @@
 package com.vfs.todoapp_final.taskedit
 
 import android.content.Context
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -63,6 +65,7 @@ class EditTaskFragment : Fragment() {
 
         // Spinner for priority color dropdown
         val spinner : Spinner = view.findViewById(R.id.spinner_task_priorities)
+
         ArrayAdapter.createFromResource(
             view.context,
             R.array.task_priority_array,
@@ -80,7 +83,7 @@ class EditTaskFragment : Fragment() {
             val name : String = view.findViewById<EditText>(R.id.text_edit_task).text.toString()
 
             // If updating existing task
-            if (taskIndex > 0) {
+            if (taskIndex >= 0) {
                 // if only updating priority, no checks needed
                 if (name == task.name) {
                     task.updateTask(
@@ -117,7 +120,6 @@ class EditTaskFragment : Fragment() {
                 Toast.makeText(context, Data.createAddFailMessage(validityOfName), Toast.LENGTH_LONG).show()
             }
         }
-
         spinner.setSelection(task.priorityColor.ordinal)
         view.findViewById<EditText>(R.id.text_edit_task).setText(task.name)
     }

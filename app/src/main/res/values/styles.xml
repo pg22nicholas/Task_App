@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="DefaultButton" parent="android:style/Widget.Button">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:background">@drawable/custom_default_button</item>
+    </style>
+
+    <style name="DefaultButtonDark" parent="android:style/Widget.Button">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:background">@drawable/custom_default_button_dark</item>
+    </style>
+</resources>

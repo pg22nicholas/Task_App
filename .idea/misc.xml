@@ -11,17 +11,23 @@
         <entry key="..\:/Programming projects/VFS-not-onedrive/android_class/Todo App Final/app/src/main/res/drawable/category_color_list.xml" value="0.24947916666666667" />
         <entry key="..\:/Programming projects/VFS-not-onedrive/android_class/Todo App Final/app/src/main/res/drawable/category_count_background.xml" value="0.37864583333333335" />
         <entry key="..\:/Programming projects/VFS-not-onedrive/android_class/Todo App Final/app/src/main/res/drawable/custom_default_button.xml" value="0.37864583333333335" />
-        <entry key="..\:/Programming projects/VFS-not-onedrive/android_class/Todo App Final/app/src/main/res/drawable/custom_default_button_not_pressed.xml" value="0.37864583333333335" />
+        <entry key="..\:/Programming projects/VFS-not-onedrive/android_class/Todo App Final/app/src/main/res/drawable/custom_default_button_dark.xml" value="0.2595" />
+        <entry key="..\:/Programming projects/VFS-not-onedrive/android_class/Todo App Final/app/src/main/res/drawable/custom_default_button_not_pressed.xml" value="0.25" />
         <entry key="..\:/Programming projects/VFS-not-onedrive/android_class/Todo App Final/app/src/main/res/drawable/custom_default_button_pressed.xml" value="0.37864583333333335" />
+        <entry key="..\:/Programming projects/VFS-not-onedrive/android_class/Todo App Final/app/src/main/res/drawable/default_button_dark.xml" value="0.2595" />
+        <entry key="..\:/Programming projects/VFS-not-onedrive/android_class/Todo App Final/app/src/main/res/drawable/default_button_dark_not_pressed.xml" value="0.349" />
+        <entry key="..\:/Programming projects/VFS-not-onedrive/android_class/Todo App Final/app/src/main/res/drawable/default_button_dark_pressed.xml" value="0.2595" />
         <entry key="..\:/Programming projects/VFS-not-onedrive/android_class/Todo App Final/app/src/main/res/drawable/default_button_shadow.xml" value="0.37864583333333335" />
         <entry key="..\:/Programming projects/VFS-not-onedrive/android_class/Todo App Final/app/src/main/res/drawable/ic_launcher_background.xml" value="0.37864583333333335" />
         <entry key="..\:/Programming projects/VFS-not-onedrive/android_class/Todo App Final/app/src/main/res/drawable/spinner_button.xml" value="0.75" />
         <entry key="..\:/Programming projects/VFS-not-onedrive/android_class/Todo App Final/app/src/main/res/drawable/task_background.xml" value="0.37864583333333335" />
+        <entry key="..\:/Programming projects/VFS-not-onedrive/android_class/Todo App Final/app/src/main/res/layout/activity_login.xml" value="0.3484375" />
         <entry key="..\:/Programming projects/VFS-not-onedrive/android_class/Todo App Final/app/src/main/res/layout/activity_main.xml" value="0.3625" />
         <entry key="..\:/Programming projects/VFS-not-onedrive/android_class/Todo App Final/app/src/main/res/layout/add_category_dialog.xml" value="0.23333333333333334" />
         <entry key="..\:/Programming projects/VFS-not-onedrive/android_class/Todo App Final/app/src/main/res/layout/category_row.xml" value="0.3625" />
         <entry key="..\:/Programming projects/VFS-not-onedrive/android_class/Todo App Final/app/src/main/res/layout/fragment_category.xml" value="0.33" />
         <entry key="..\:/Programming projects/VFS-not-onedrive/android_class/Todo App Final/app/src/main/res/layout/fragment_edit_task.xml" value="0.296875" />
+        <entry key="..\:/Programming projects/VFS-not-onedrive/android_class/Todo App Final/app/src/main/res/layout/fragment_login.xml" value="0.3625" />
         <entry key="..\:/Programming projects/VFS-not-onedrive/android_class/Todo App Final/app/src/main/res/layout/fragment_task.xml" value="0.25" />
         <entry key="..\:/Programming projects/VFS-not-onedrive/android_class/Todo App Final/app/src/main/res/layout/task_row.xml" value="0.3625" />
         <entry key="..\:/Programming projects/VFS-not-onedrive/android_class/Todo App Final/app/src/main/res/menu/category_list_toolbar_menu.xml" value="0.27395833333333336" />

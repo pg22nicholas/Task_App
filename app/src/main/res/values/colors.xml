@@ -23,5 +23,17 @@
 
     <color name="task_background_finished">#C6C6C6</color>
 
+    <color name="colorRedAccentBright">#e84545</color>
+    <color name="colorRedAccentMedium">#903749</color>
+    <color name="colorRedAccentDark">#53354a</color>
+
+    <color name="colorPrimary">#272443</color>
+    <color name="colorPrimaryDark">#1F1D35</color>
+    <color name="colorAccent">#CFCFCF</color>
+    <color name="colorSecondary">#2D2E40</color>
+    <color name="colorSurface">#2C2C2C</color>
+    <color name="colorOnSurface">#232323</color>
+    <color name="colorOnBackground">#2b2e4a</color>
+
 
 </resources>

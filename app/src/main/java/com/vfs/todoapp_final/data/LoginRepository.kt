@@ -1,5 +1,6 @@
 package com.vfs.todoapp_final.data
 
+import android.os.Message
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.vfs.todoapp_final.data.model.LoggedInUser
@@ -42,10 +43,18 @@ object LoginRepository {
     }
 
     fun login(email: String, password: String, successCallback: (Boolean, String) -> Unit) {
-        /*auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task -> {
-                task.
-            }}*/
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val username = auth.currentUser!!.displayName.toString()
+                    val email = auth.currentUser!!.email.toString()
+                    val uid = auth.currentUser!!.uid
+                    setLoggedInUser(LoggedInUser(uid, username, email))
+                    successCallback(true, "")
+                } else {
+                    successCallback(false, task.exception.toString())
+                }
+            }
     }
 
     fun logout() {

@@ -1,5 +1,7 @@
 package com.vfs.todoapp_final.loginpage.login
 
+import com.vfs.todoapp_final.data.LoginRepository
+
 class LoginPresenter : LoginContract.LoginPresenter{
 
     private var view: LoginContract.LoginView? = null
@@ -12,7 +14,12 @@ class LoginPresenter : LoginContract.LoginPresenter{
         view = null
     }
 
-    override fun login(username: String?, password: String?) {
-        // TODO: Perform login
+    override fun login(email: String, password: String) {
+        LoginRepository.login(email, password, ::loginResponse)
+    }
+
+    private fun loginResponse(isSuccess: Boolean, error: String) {
+        if (isSuccess) view?.loginSuccessful()
+        else view?.loginUnSuccessful(error)
     }
 }

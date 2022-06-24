@@ -15,11 +15,11 @@ interface LoginContract {
         fun destroy()
 
         /**
-         * Use user input to login with the username and password.
-         * @param username              Username of the new user
-         * @param password              Password of the new user
+         * Use user input to login with the email and password.
+         * @param email                 email of user
+         * @param password              Password of user
          */
-        fun login(username: String?, password: String?)
+        fun login(email: String, password: String)
     }
 
     interface LoginView {

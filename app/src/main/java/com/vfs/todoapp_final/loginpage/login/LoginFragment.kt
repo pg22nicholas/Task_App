@@ -32,6 +32,8 @@ class LoginFragment : Fragment(), LoginContract.LoginView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setOnClicks(view)
+        presenter = LoginPresenter();
+        (presenter as LoginPresenter).setView(this)
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -48,10 +50,7 @@ class LoginFragment : Fragment(), LoginContract.LoginView {
 
     companion object {
         @JvmStatic
-        fun newInstance() = LoginFragment().apply {
-            presenter = LoginPresenter();
-            (presenter as LoginPresenter).setView(this)
-        }
+        fun newInstance() = LoginFragment().apply {}
     }
 
     override fun loadingStarted() {
@@ -63,6 +62,7 @@ class LoginFragment : Fragment(), LoginContract.LoginView {
     }
 
     override fun loginSuccessful() {
+        Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
         loginListener?.loginSuccessful()
     }
 

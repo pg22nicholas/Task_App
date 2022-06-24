@@ -1,33 +1,25 @@
 package com.vfs.todoapp_final.loginpage.signup
 
+import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.vfs.todoapp_final.R
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class SignUpFragment : Fragment(), SignUpContract.SignUpView {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SignUpFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class SignUpFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    var presenter: SignUpContract.SignUpPresenter? = null
+    private var listener: SignUpListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
@@ -38,23 +30,76 @@ class SignUpFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_sign_up, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setOnClicks(view)
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        // attach listener implemented by parent Activity
+        listener = context as SignUpListener
+    }
+
+    override fun onDetach() {
+        listener = null
+        presenter!!.destroy()
+        super.onDetach()
+    }
+
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SignUpFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             SignUpFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+                presenter = SignUpPresenter();
+                (presenter as SignUpPresenter).setView(this)
             }
+    }
+
+    override fun loadingStarted() {
+        Toast.makeText(context, "Loading Started", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun loadingFailed(message: String?) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun signUpSuccessful() {
+        Toast.makeText(context, "Signup successful", Toast.LENGTH_SHORT).show()
+        listener?.gotoLoginScreen()
+    }
+
+    override fun signUpUnSuccessful(messages: String?) {
+        Toast.makeText(context, messages, Toast.LENGTH_SHORT).show()
+    }
+
+    /**
+     * Sets up the OnClick events.
+     */
+    private fun setOnClicks(view : View) {
+        // button click for signing in with the current
+        view.findViewById<Button>(R.id.btn_sign_up)?.setOnClickListener {
+            // take user input for sign in
+            val username: String = view.findViewById<EditText>(R.id.edit_txt_username)?.text.toString()
+            val password: String = view.findViewById<EditText>(R.id.edit_txt_password)?.text.toString()
+            val email: String = view.findViewById<EditText>(R.id.edit_txt_email)?.text.toString()
+            // use the user input to create new account if valid user input
+            presenter?.signUp(username, password, email)
+        }
+    }
+
+    /**
+     * Listener implemented in the parent Activity to communicate with it
+     */
+    interface SignUpListener {
+        /**
+         * Return to the login screen
+         */
+        fun gotoLoginScreen()
+
+        /**
+         * Go to the main screen as signing up was successful.
+         */
+        fun signUpSuccessful()
     }
 }

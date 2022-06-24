@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Task App</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="LOGIN_TAG">login_tag</string>
+    <string name="SIGN_UP_TAG">sign_up_tag</string>
+
 </resources>

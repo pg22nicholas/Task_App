@@ -1,18 +1,19 @@
 package com.vfs.todoapp_final.loginpage.signup
 
-class SignUpPresenter {
+class SignUpPresenter : SignUpContract.SignUpPresenter {
 
     private var view: SignUpContract.SignUpView? = null
 
-    fun setView(view: SignUpContract.SignUpView?) {
+    override fun setView(view: SignUpContract.SignUpView?) {
         this.view = view
     }
 
-    fun destroy() {
+    override fun destroy() {
         view = null
     }
 
-    fun signUp(username: String?, password: String?, email: String?) {
-        // TODO: Signup
+    override fun signUp(username: String?, password: String?, email: String?) {
+        // TODO:
     }
+
 }

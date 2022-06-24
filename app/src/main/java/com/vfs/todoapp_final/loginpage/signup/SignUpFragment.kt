@@ -11,6 +11,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.google.firebase.auth.FirebaseAuth
 import com.vfs.todoapp_final.R
 
 class SignUpFragment : Fragment(), SignUpContract.SignUpView {
@@ -32,6 +33,8 @@ class SignUpFragment : Fragment(), SignUpContract.SignUpView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setOnClicks(view)
+        presenter = SignUpPresenter()
+        (presenter as SignUpPresenter).setView(this)
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -50,10 +53,7 @@ class SignUpFragment : Fragment(), SignUpContract.SignUpView {
     companion object {
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            SignUpFragment().apply {
-                presenter = SignUpPresenter();
-                (presenter as SignUpPresenter).setView(this)
-            }
+            SignUpFragment().apply {}
     }
 
     override fun loadingStarted() {
@@ -80,11 +80,10 @@ class SignUpFragment : Fragment(), SignUpContract.SignUpView {
         // button click for signing in with the current
         view.findViewById<Button>(R.id.btn_sign_up)?.setOnClickListener {
             // take user input for sign in
-            val username: String = view.findViewById<EditText>(R.id.edit_txt_username)?.text.toString()
-            val password: String = view.findViewById<EditText>(R.id.edit_txt_password)?.text.toString()
             val email: String = view.findViewById<EditText>(R.id.edit_txt_email)?.text.toString()
+            val password: String = view.findViewById<EditText>(R.id.edit_txt_password)?.text.toString()
             // use the user input to create new account if valid user input
-            presenter?.signUp(username, password, email)
+            presenter?.signUp(email, password)
         }
     }
 

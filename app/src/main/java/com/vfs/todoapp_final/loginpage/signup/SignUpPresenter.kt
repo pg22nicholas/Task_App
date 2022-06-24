@@ -15,8 +15,8 @@ class SignUpPresenter : SignUpContract.SignUpPresenter {
         view = null
     }
 
-    override fun signUp(email: String, password: String) {
-        LoginRepository.signup(email, password, ::signupResponse)
+    override fun signUp(username: String, email: String, password: String) {
+        LoginRepository.signup(username, email, password, ::signupResponse)
     }
 
     private fun signupResponse(isSuccess: Boolean, error: String) {

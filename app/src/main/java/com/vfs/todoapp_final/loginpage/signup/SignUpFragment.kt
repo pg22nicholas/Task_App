@@ -80,10 +80,11 @@ class SignUpFragment : Fragment(), SignUpContract.SignUpView {
         // button click for signing in with the current
         view.findViewById<Button>(R.id.btn_sign_up)?.setOnClickListener {
             // take user input for sign in
+            val username: String = view.findViewById<EditText>(R.id.edit_txt_username)?.text.toString()
             val email: String = view.findViewById<EditText>(R.id.edit_txt_email)?.text.toString()
             val password: String = view.findViewById<EditText>(R.id.edit_txt_password)?.text.toString()
             // use the user input to create new account if valid user input
-            presenter?.signUp(email, password)
+            presenter?.signUp(username, email, password)
         }
     }
 

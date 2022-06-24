@@ -15,11 +15,12 @@ interface SignUpContract {
         fun destroy()
 
         /**
-         * Use the user input to sign up using the Password, and Email. If invalid user input, notify the view.
+         * Use the user input to sign up using the Username, Password, and Email. If invalid user input, notify the view.
+         * @param username              Username of the new user
          * @param password              Password of the new user
          * @param email                 Email of the new user
          */
-        fun signUp(email: String, password: String)
+        fun signUp(username: String, email: String, password: String)
     }
 
     interface SignUpView {

@@ -23,12 +23,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/edit_txt_email"
+            android:id="@+id/edit_txt_username"
             android:layout_width="@dimen/login_edit_text_width"
             android:layout_height="@dimen/login_edit_text_height"
             android:layout_marginTop="@dimen/login_margin_top"
             android:background="@color/colorSecondary"
-            android:hint="Email"
+            android:hint="Username"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -43,7 +43,19 @@
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_txt_email" />
+            app:layout_constraintTop_toBottomOf="@+id/edit_txt_username" />
+
+        <EditText
+            android:id="@+id/edit_txt_email"
+            android:layout_width="@dimen/login_edit_text_width"
+            android:layout_height="@dimen/login_edit_text_height"
+            android:layout_marginTop="@dimen/login_margin_top"
+            android:background="@color/colorSecondary"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_txt_password" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_sign_up"
@@ -55,7 +67,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_txt_password" />
+            app:layout_constraintTop_toBottomOf="@+id/edit_txt_email" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

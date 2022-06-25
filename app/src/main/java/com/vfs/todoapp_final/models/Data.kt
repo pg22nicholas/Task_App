@@ -2,6 +2,7 @@ package com.vfs.todoapp_final.models
 
 import android.app.Application
 import android.util.Log
+import com.google.firebase.ktx.Firebase
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -23,18 +24,6 @@ class Data {
 
             // Initiate starting data if task json file doesn't exist
             if (!FileStorage.isFilePresent(application)) {
-                val Task1 = Task("game1", MyColor.PriorityColors.HIGH)
-
-                val Task2 = Task("game2")
-                val cat1 = Category("cat1", MyColor.CategoryColors.BLUE, mutableListOf(Task1, Task2))
-                categoryList.add(cat1)
-
-                val Task3 = Task("game3", MyColor.PriorityColors.HIGH)
-                val Task4 = Task("game4", MyColor.PriorityColors.MEDIUM)
-                val Task5 = Task("game5", true)
-                val cat2 = Category("cat2", MyColor.CategoryColors.RED, mutableListOf(Task3, Task4, Task5))
-                categoryList.add(cat2)
-
                 FileStorage.create(application, Json.encodeToString(categoryList))
                 Log.i("storage", "stored data")
                 // otherwise, retrieve existing data
@@ -48,7 +37,13 @@ class Data {
 
         fun saveData() {
             FileStorage.create(application, Json.encodeToString(categoryList))
+            FirebaseData.updateOnlineData { b, s ->  }
         }
+
+        fun saveDataFromString(jsonString: String) {
+            FileStorage.create(application, jsonString)
+        }
+
 
         /**
          * Add a category if its name is valid

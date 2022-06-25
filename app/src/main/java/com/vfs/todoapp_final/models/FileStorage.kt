@@ -1,8 +1,11 @@
 package com.vfs.todoapp_final.models
 
 import android.content.Context
+import android.util.Log
+import com.google.firebase.ktx.Firebase
 import java.io.*
 import java.lang.StringBuilder
+import kotlin.math.log
 
 /**
  * Deals with saving and loading serialized JSON data to and from device storage
@@ -43,6 +46,7 @@ class FileStorage {
                 if (jsonString != null) {
                     fos.write(jsonString.toByteArray())
                 }
+                Log.i("TEST", "data saved")
                 fos.close()
                 true
             } catch (fileNotFound: FileNotFoundException) {

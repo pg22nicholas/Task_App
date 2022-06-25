@@ -84,9 +84,7 @@ class CategoryFragment : Fragment() {
             .create()
 
         view.findViewById<Button>(R.id.button_add_category).setOnClickListener {
-            FirebaseData.writeObject { b, s ->
-            }
-            //createAddCategoryDialog()
+            createAddCategoryDialog()
         }
     }
 

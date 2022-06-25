@@ -4,6 +4,7 @@ import android.os.Message
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.vfs.todoapp_final.data.model.LoggedInUser
+import com.vfs.todoapp_final.models.FirebaseData
 
 /**
  * Class that requests authentication and user information from the remote data source and
@@ -22,8 +23,6 @@ object LoginRepository {
         get() = user != null
 
     init {
-        // If user credentials will be cached in local storage, it is recommended it be encrypted
-        // @see https://developer.android.com/training/articles/keystore
         user = null
     }
 

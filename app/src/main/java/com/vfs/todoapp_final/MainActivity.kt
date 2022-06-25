@@ -1,9 +1,12 @@
 package com.vfs.todoapp_final
 
+import android.app.Application
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.view.View.GONE
+import android.widget.FrameLayout
 import com.vfs.todoapp_final.categorylist.CategoryFragment
 import com.vfs.todoapp_final.categorylist.CategoryListener
 import com.vfs.todoapp_final.models.Data
@@ -15,8 +18,7 @@ import com.vfs.todoapp_final.tasklist.TaskListener
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import androidx.annotation.NonNull
-
-
+import com.vfs.todoapp_final.models.FirebaseData
 
 
 /**
@@ -28,6 +30,8 @@ class MainActivity : AppCompatActivity(), CategoryListener, EditTaskListener, Ta
     lateinit var categoryFragment: CategoryFragment
     lateinit var editTaskFragment : EditTaskFragment
 
+    var isLoading: Boolean = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -35,10 +39,19 @@ class MainActivity : AppCompatActivity(), CategoryListener, EditTaskListener, Ta
         Data.initiateData(application)
         MyColor.initiateColors(application)
 
-        categoryFragment = CategoryFragment.newInstance();
-        supportFragmentManager.beginTransaction()
-            .add(R.id.fragment_container, categoryFragment)
-            .commit()
+        FirebaseData.storeOnlineData { b, s ->
+            isLoading = true
+            findViewById<FrameLayout>(R.id.screen_cover).visibility = GONE;
+
+            if (b) {
+                Data.initiateData(application)
+            }
+
+            categoryFragment = CategoryFragment.newInstance();
+            supportFragmentManager.beginTransaction()
+                .add(R.id.fragment_container, categoryFragment)
+                .commit()
+        }
     }
 
     override fun onCategorySelected(index: Int) {

@@ -31,9 +31,10 @@ object LoginRepository {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    UserProfileChangeRequest.Builder()
+                    val profileUpdate = UserProfileChangeRequest.Builder()
                         .setDisplayName(username)
                         .build()
+                    auth.currentUser!!.updateProfile(profileUpdate)
 
                     successCallback(true, "")
                 } else {

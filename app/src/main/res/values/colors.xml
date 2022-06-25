@@ -35,5 +35,7 @@
     <color name="colorOnSurface">#232323</color>
     <color name="colorOnBackground">#2b2e4a</color>
 
+    <color name="editTextTextColor">#959595</color>
+    <color name="editTextHintColor">#6E6E6E</color>
 
 </resources>

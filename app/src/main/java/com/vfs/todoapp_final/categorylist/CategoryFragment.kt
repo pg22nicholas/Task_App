@@ -12,6 +12,7 @@ import com.vfs.todoapp_final.CategoryAdapter
 import com.vfs.todoapp_final.R
 import com.vfs.todoapp_final.models.Category
 import com.vfs.todoapp_final.models.Data
+import com.vfs.todoapp_final.models.FirebaseData
 import com.vfs.todoapp_final.models.MyColor
 
 
@@ -83,7 +84,9 @@ class CategoryFragment : Fragment() {
             .create()
 
         view.findViewById<Button>(R.id.button_add_category).setOnClickListener {
-            createAddCategoryDialog()
+            FirebaseData.writeObject { b, s ->
+            }
+            //createAddCategoryDialog()
         }
     }
 

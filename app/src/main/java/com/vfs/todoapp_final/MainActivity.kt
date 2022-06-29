@@ -52,6 +52,8 @@ class MainActivity : AppCompatActivity(), CategoryListener, EditTaskListener, Ta
                 .add(R.id.fragment_container, categoryFragment)
                 .commit()
         }
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onCategorySelected(index: Int) {
@@ -102,7 +104,7 @@ class MainActivity : AppCompatActivity(), CategoryListener, EditTaskListener, Ta
 
     // Hide HomeUp button if category list is visible
     private fun checkShowHomeUpButton() {
-        supportActionBar?.setDisplayHomeAsUpEnabled(!categoryFragment.isVisible)
+        //supportActionBar?.setDisplayHomeAsUpEnabled(!categoryFragment.isVisible)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

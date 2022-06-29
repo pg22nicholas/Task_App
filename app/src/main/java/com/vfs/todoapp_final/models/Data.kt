@@ -118,6 +118,11 @@ class Data {
                 }
             }
         }
+
+        fun reset() {
+            categoryList = mutableListOf()
+        }
+
     }
 
     enum class VALID_NAME_RETURNS {

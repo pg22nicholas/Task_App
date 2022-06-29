@@ -72,6 +72,7 @@ object FirebaseData {
 
                         })
                 } else {
+                    Data.reset()
                     successCallback(false, "no online data")
                 }
             }

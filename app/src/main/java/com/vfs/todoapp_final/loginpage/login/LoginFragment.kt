@@ -86,11 +86,6 @@ class LoginFragment : Fragment(), LoginContract.LoginView {
             val password: String = view.findViewById<EditText>(R.id.edit_txt_password)?.text.toString()
             presenter?.login(username, password)
         }
-
-        // onClick for continuing into offline mode
-        view.findViewById<Button>(R.id.btn_cont_offline)?.setOnClickListener {
-            loginListener?.continueOffline()
-        }
     }
 
     interface LoginListener {
@@ -103,10 +98,5 @@ class LoginFragment : Fragment(), LoginContract.LoginView {
          * Successful login, goto main screen.
          */
         fun loginSuccessful()
-
-        /**
-         * Continue in offline mode, going to main screen without a token.
-         */
-        fun continueOffline()
     }
 }

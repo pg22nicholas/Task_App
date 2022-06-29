@@ -1,10 +1,7 @@
-package com.vfs.todoapp_final.data
+package com.vfs.todoapp_final.models
 
-import android.os.Message
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
-import com.vfs.todoapp_final.data.model.LoggedInUser
-import com.vfs.todoapp_final.models.FirebaseData
 
 /**
  * Class that requests authentication and user information from the remote data source and
@@ -62,6 +59,6 @@ object LoginRepository {
     }
 
     private fun setLoggedInUser(loggedInUser: LoggedInUser) {
-        this.user = loggedInUser
+        user = loggedInUser
     }
 }

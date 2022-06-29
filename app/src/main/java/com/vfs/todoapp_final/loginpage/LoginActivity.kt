@@ -31,10 +31,6 @@ class LoginActivity : AppCompatActivity(), SignUpFragment.SignUpListener, LoginF
         gotoMainScreen()
     }
 
-    override fun continueOffline() {
-        gotoMainScreen()
-    }
-
     override fun gotoLoginScreen() {
         setLoginScreenVisibility(VISIBLE)
     }

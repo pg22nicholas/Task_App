@@ -73,19 +73,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_login" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_cont_offline"
-            style="@style/DefaultButton"
-            android:layout_width="@dimen/login_btn_width"
-            android:layout_height="@dimen/login_btn_height"
-            android:layout_marginBottom="16dp"
-            android:text="Continue Offline"
-            android:backgroundTint="#101420"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
-            app:layout_constraintStart_toStartOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

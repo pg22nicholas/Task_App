@@ -1,6 +1,6 @@
 package com.vfs.todoapp_final.loginpage.signup
 
-import com.vfs.todoapp_final.data.LoginRepository
+import com.vfs.todoapp_final.models.LoginRepository
 
 class SignUpPresenter : SignUpContract.SignUpPresenter {
 

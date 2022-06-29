@@ -1,6 +1,5 @@
 package com.vfs.todoapp_final.models
 
-import android.os.Message
 import android.util.Log
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -8,10 +7,8 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.vfs.todoapp_final.data.LoginRepository
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import kotlin.math.log
 
 object FirebaseData {
 
@@ -27,7 +24,8 @@ object FirebaseData {
                         .child("data")
                         .setValue(Json.encodeToString(Data.categoryList))
                 } else {
-                    database.getReference("users").child(LoginRepository.user!!.userId).setValue(LoginRepository.user, DatabaseReference.CompletionListener { error, ref ->
+                    database.getReference("users").child(LoginRepository.user!!.userId).setValue(
+                        LoginRepository.user, DatabaseReference.CompletionListener { error, ref ->
                         if (error == null) {
                             database.getReference("users")
                                 .child(LoginRepository.user!!.userId)

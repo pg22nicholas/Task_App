@@ -63,6 +63,8 @@ class LoginFragment : Fragment(), LoginContract.LoginView {
 
     override fun loginSuccessful() {
         Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
+        view?.findViewById<EditText>(R.id.edit_txt_username)?.setText("")
+        view?.findViewById<EditText>(R.id.edit_txt_password)?.setText("")
         loginListener?.loginSuccessful()
     }
 

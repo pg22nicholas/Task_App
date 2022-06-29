@@ -66,6 +66,9 @@ class SignUpFragment : Fragment(), SignUpContract.SignUpView {
 
     override fun signUpSuccessful() {
         Toast.makeText(context, "Signup successful", Toast.LENGTH_SHORT).show()
+        view?.findViewById<EditText>(R.id.edit_txt_username)?.setText("")
+        view?.findViewById<EditText>(R.id.edit_txt_email)?.setText("")
+        view?.findViewById<EditText>(R.id.edit_txt_password)?.setText("")
         listener?.gotoLoginScreen()
     }
 
